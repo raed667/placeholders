@@ -4,7 +4,7 @@ import { readFile, writeFile, access, mkdir } from "fs/promises";
 
 export const getCacheKey = (query: string) =>
   slugify(
-    `${query}`
+    query
       .replace(/^\//, "")
       .replace(/\//g, "_")
       .replace(/\?/g, "--")

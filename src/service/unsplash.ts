@@ -48,7 +48,7 @@ export const getImage = async (
     };
   });
 
-  setCache(getCacheKey(query), images);
+  setCache(getCacheKey(queryParams), images);
 
   const randomIndex = Math.floor(Math.random() * results.length);
   return images[randomIndex];
