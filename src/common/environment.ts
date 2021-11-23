@@ -37,7 +37,7 @@ const getEnvValue = (key: string) => {
 };
 
 const getEnvArrayValue = (key: string, optional?: boolean): string[] => {
-  const valueStr = getEnvValue(key);
+  const valueStr = process.env[key];
   if (!valueStr) {
     if (optional) {
       return [];
