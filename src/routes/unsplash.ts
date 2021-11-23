@@ -1,11 +1,9 @@
 import request from "request";
 import express, { Request, Response } from "express";
+import slugify from "slugify";
 
 import { validateImageSize, validateOrientation } from "../service/validators";
 import { getImage } from "../service/unsplash";
-import { environment } from "../common/environment";
-
-const { CACHE_TTL } = environment();
 
 const router = express.Router();
 
@@ -20,10 +18,9 @@ router.get("/image/:search?", async (req: Request, res: Response) => {
   );
 
   res.set("Content-Type", "image/jpeg");
-  res.header("cache-control", `public, max-age=${CACHE_TTL}`);
 
   Object.entries(meta).forEach(([key, value]) => {
-    res.header(`x-${key}`, String(value));
+    res.header(`x-${key}`, slugify(String(value)));
   });
 
   request.get(url).pipe(res);

@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import cors from "cors";
+import nocache from "nocache";
 import "express-async-errors";
 
 import { environment } from "./common/environment";
@@ -16,6 +17,8 @@ const appExpress = express();
 /** **********************************************************************************
  *                              Set basic express settings
  ********************************************************************************** */
+
+appExpress.use(nocache());
 
 appExpress.use(
   cors({
@@ -62,9 +65,11 @@ if (NODE_ENV === "dev") {
 }
 
 /** **********************************************************************************
- *                              Register API routes
+ *                              Register routes
  ********************************************************************************** */
 appExpress.use("/", routes);
+
+appExpress.use(express.static("public"));
 
 appExpress.get("/favicon.ico", async (_req, res) => {
   res.status(404);
