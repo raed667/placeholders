@@ -2,7 +2,7 @@
     "name": "Unsplash placeholders",
     "description": "Generate placeholders using unsplash's API",
     "repository": "https://github.com/RaedsLab/placeholders",
-    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "logo": "https://nodejs.org/static/images/logo-hexagon-card.png",
     "keywords": [
         "node",
         "express",
