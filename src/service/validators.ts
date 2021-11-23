@@ -1,4 +1,3 @@
-import { Orientation } from "unsplash-js";
 import { VeryBasic } from "unsplash-js/dist/methods/photos/types";
 
 type ImageSize = keyof VeryBasic["urls"];
@@ -9,12 +8,4 @@ export const validateImageSize = (size: any): ImageSize => {
     : "thumb";
 
   return result as ImageSize;
-};
-
-export const validateOrientation = (orientation: any): Orientation => {
-  const result = ["landscape", "portrait", "squarish"].includes(orientation)
-    ? orientation
-    : "squarish";
-
-  return result as Orientation;
 };

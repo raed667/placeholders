@@ -2,9 +2,9 @@ import slugify from "slugify";
 import { join } from "path";
 import { readFile, writeFile, access, mkdir } from "fs/promises";
 
-export const getCacheKey = (query: string, size: string, orientation: string) =>
+export const getCacheKey = (query: string) =>
   slugify(
-    `${query}_${size}_${orientation}`
+    `${query}`
       .replace(/^\//, "")
       .replace(/\//g, "_")
       .replace(/\?/g, "--")

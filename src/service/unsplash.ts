@@ -1,49 +1,32 @@
-import { createApi, Orientation } from "unsplash-js";
-import { VeryBasic } from "unsplash-js/dist/methods/photos/types";
-import fetch from "cross-fetch";
-
+import { getImages } from "../domain/unsplash";
+import qs from "qs";
 import { environment } from "../common/environment";
-import logger from "../common/logger";
-import { getCacheKey, getCache, setCache } from "./cache";
+import { getCacheKey, setCache, getCache } from "./cache";
+import { validateImageSize } from "./validators";
+import { Request } from "express";
 
 const DEFAULT_SEARCH = "puppy";
 
-const { UNSPLASH_ACCESS_KEY, PAGE_SIZE } = environment();
-
-const unsplash = createApi({
-  accessKey: UNSPLASH_ACCESS_KEY,
-  fetch,
-});
-
-const searchUnsplash = async (query: string, orientation: Orientation) => {
-  const result = await unsplash.photos.getRandom({
-    count: PAGE_SIZE,
-    query,
-    orientation,
-  });
-
-  if (result.type !== "success") {
-    logger.error(`Unsplash search failed: ${result.status}`, {
-      result,
-    });
-    throw new Error(JSON.stringify(result.errors));
-  }
-
-  return result.response;
-};
+const { PAGE_SIZE } = environment();
 
 export const getImage = async (
   query = DEFAULT_SEARCH,
-  size: keyof VeryBasic["urls"],
-  orientation: Orientation
+  params: Request["query"]
 ) => {
-  const cached = await getCache(getCacheKey(query, size, orientation));
+  const queryParams = `/photos/random?${qs.stringify({
+    count: PAGE_SIZE,
+    query,
+    ...params,
+  })}`;
+
+  // Fin in cache
+  const cached = await getCache(getCacheKey(queryParams));
   if (cached) {
     const randomIndex = Math.floor(Math.random() * cached.length);
     return cached[randomIndex];
   }
 
-  const results = await searchUnsplash(query, orientation);
+  const results = await getImages(queryParams);
 
   if (!results || !Array.isArray(results) || results.length === 0) {
     throw new Error("No images found");
@@ -51,7 +34,7 @@ export const getImage = async (
 
   const images = results.map((res) => {
     const { width, height, urls, color, alt_description, user } = res;
-    const url = urls[size];
+    const url = urls[validateImageSize(params.size)];
     return {
       url,
       meta: {
@@ -65,7 +48,7 @@ export const getImage = async (
     };
   });
 
-  setCache(getCacheKey(query, size, orientation), images);
+  setCache(getCacheKey(query), images);
 
   const randomIndex = Math.floor(Math.random() * results.length);
   return images[randomIndex];

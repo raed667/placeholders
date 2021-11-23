@@ -6,26 +6,25 @@ Generate placeholders images using unsplash's API.
 
 ```html
 <img
-  src="https://unsplash-placeholders.herokuapp.com/image/restaurant?size=small"
+  src="https://unsplash-placeholders.herokuapp.com/image/restaurant?w=200&h=200&fit=crop"
 />
 ```
 
-**Click here to test it out [https://unsplash-placeholders.herokuapp.com/image/restaurant?size=regular&orientation=landscape](https://unsplash-placeholders.herokuapp.com/image/restaurant?size=regular&orientation=landscape)**
+**Click here to test it out [https://unsplash-placeholders.herokuapp.com/image/restaurant?w=200&h=200&fit=crop](https://unsplash-placeholders.herokuapp.com/image/restaurant?w=200&h=200&fit=crop)**
 
 ### Detailed usage
 
 The endpoint is fairly simple to call:
 
 ```
-/image/:search?size=[full|raw|regular|small|thumb]&orientation=[landscape|portrait|squarish]
+/image/:search
 ```
 
 You can call this endpoint using a search term to look for some specific images on Unsplash.
 This allows for domain-specific placeholders, e.g. `/restaurant`, `/architecture` or `/landscape`.
 It downloads and caches 30 results for the query, then randomly serves one.
 
-- You can provide a `size` parameter (default value `thumb`)
-- You can provide an `orientation` parameter (default value `squarish`)
+You can pass as query parameters all the [supported parameters](https://unsplash.com/documentation#supported-parameters) to manipulate the picture, e.g. `?w=200&h=200&fit=crop`.
 
 ## FAQ
 
@@ -48,6 +47,11 @@ Retry an hour later.
 ### Limit who can use the placeholders
 
 In the environment variables, you can set `CORS_ALLOWED_ORIGINS` as a list of domains (example `raed.dev,raed.it,raed.tn`) These domains will be the only ones allowed to embed the images. If the variable is not set, or left empty, everyone can use the placeholder service.
+
+## TODO
+
+- [ ] Use Redis for cache instead of filesystem
+- [ ] Monitor usage
 
 ## Acknowledgements
 
