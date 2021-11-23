@@ -14,7 +14,11 @@ Generate placeholders images using unsplash's API.
 
 ### Detailed usage
 
-#### `/image/:search?size=[full|raw|regular|small|thumb]&orientation=[landscape|portrait|squarish]`
+The endpoint is fairly simple to call:
+
+```
+/image/:search?size=[full|raw|regular|small|thumb]&orientation=[landscape|portrait|squarish]
+```
 
 You can call this endpoint using a search term to look for some specific images on Unsplash.
 This allows for domain-specific placeholders, e.g. `/restaurant`, `/architecture` or `/landscape`.
