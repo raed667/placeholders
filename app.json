@@ -1,7 +1,7 @@
 {
     "name": "Unsplash placeholders",
     "description": "Generate placeholders using unsplash's API",
-    "repository": "https://github.com/RaedsLab/placeholders",
+    "repository": "https://github.com/Raed667/placeholders",
     "logo": "https://nodejs.org/static/images/logo-hexagon-card.png",
     "keywords": [
         "node",
