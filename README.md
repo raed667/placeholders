@@ -39,10 +39,7 @@ Retry an hour later.
 
 ### How to host this application?
 
-- First you need to specify the environnement variable `UNSPLASH_ACCESS_KEY`. For this you will need to create an [unsplash application](https://unsplash.com/developers), and copy the access key provided.
-- This project is ran on heroku, but it is just a simple NodeJS application and will run on whatever server you can provide.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RaedsLab/placeholders)
+- You need to specify the environnement variable `UNSPLASH_ACCESS_KEY`. For this you will need to create an [unsplash application](https://unsplash.com/developers), and copy the access key provided.
 
 ### Limit who can use the placeholders
 
