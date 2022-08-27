@@ -6,11 +6,11 @@ Generate placeholders images using unsplash's API.
 
 ```html
 <img
-  src="https://unsplash-placeholders.herokuapp.com/image/restaurant?w=200&h=200&fit=crop"
+  src="https://placeholder.raed.dev/image/restaurant?w=200&h=200&fit=crop"
 />
 ```
 
-**Click here to test it out [https://unsplash-placeholders.herokuapp.com/image/restaurant?w=200&h=200&fit=crop](https://unsplash-placeholders.herokuapp.com/image/restaurant?w=200&h=200&fit=crop)**
+**Click here to test it out [https://placeholder.raed.dev/image/restaurant?w=200&h=200&fit=crop](https://placeholder.raed.dev/image/restaurant?w=200&h=200&fit=crop)**
 
 ### Detailed usage
 
